@@ -294,7 +294,7 @@ Notifications.registerNotificationActions = function() {
 
 Notifications.clearAllNotifications = function() {
 	// Only available for Android
-	return this.callNative('clearAllNotifications', arguments)
+	return this.callNative('clearAllLocalNotifications', arguments)
 }
 
 module.exports = Notifications;
