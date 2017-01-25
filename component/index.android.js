@@ -30,16 +30,16 @@ NotificationsComponent.prototype.requestPermissions = function(senderID: string)
 	RNPushNotification.requestPermissions(senderID);
 };
 
+NotificationsComponent.prototype.clearAllLocalNotifications = function() {
+	RNPushNotification.clearAllLocalNotifications();
+};
+
 NotificationsComponent.prototype.cancelLocalNotifications = function(details: Object) {
 	RNPushNotification.cancelLocalNotifications(details);
 };
 
 NotificationsComponent.prototype.cancelAllLocalNotifications = function() {
 	RNPushNotification.cancelAllLocalNotifications();
-};
-
-NotificationsComponent.prototype.clearAllLocalNotifications = function() {
-	RNPushNotification.clearAllLocalNotifications();
 };
 
 NotificationsComponent.prototype.presentLocalNotification = function(details: Object) {
