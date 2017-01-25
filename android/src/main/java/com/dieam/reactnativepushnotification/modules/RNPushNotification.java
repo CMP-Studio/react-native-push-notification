@@ -180,6 +180,15 @@ public class RNPushNotification extends ReactContextBaseJavaModule implements Ac
         mRNPushNotificationHelper.cancelAllScheduledNotifications();
         mRNPushNotificationHelper.clearNotifications();
     }
+    
+    @ReactMethod
+    /**
+     * Clears all entries from the notification
+     * centre.
+     */
+    public void clearAllLocalNotifications() {
+        mRNPushNotificationHelper.clearNotifications();
+    }
 
     @ReactMethod
     /**
