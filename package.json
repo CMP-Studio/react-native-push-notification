@@ -1,70 +1,11 @@
 {
-  "_args": [
-    [
-      {
-        "raw": "react-native-push-notification@git+https://github.com/CMP-Studio/react-native-push-notification.git",
-        "scope": null,
-        "escapedName": "react-native-push-notification",
-        "name": "react-native-push-notification",
-        "rawSpec": "git+https://github.com/CMP-Studio/react-native-push-notification.git",
-        "spec": "git+https://github.com/CMP-Studio/react-native-push-notification.git",
-        "type": "hosted",
-        "hosted": {
-          "type": "github",
-          "ssh": "git@github.com:CMP-Studio/react-native-push-notification.git",
-          "sshUrl": "git+ssh://git@github.com/CMP-Studio/react-native-push-notification.git",
-          "httpsUrl": "git+https://github.com/CMP-Studio/react-native-push-notification.git",
-          "gitUrl": "git://github.com/CMP-Studio/react-native-push-notification.git",
-          "shortcut": "github:CMP-Studio/react-native-push-notification",
-          "directUrl": "https://raw.githubusercontent.com/CMP-Studio/react-native-push-notification/master/package.json"
-        }
-      },
-      "/Users/ticknors/DawnChorus"
-    ]
-  ],
-  "_from": "git+https://github.com/CMP-Studio/react-native-push-notification.git",
-  "_id": "react-native-push-notification@2.2.1",
-  "_inCache": true,
-  "_location": "/react-native-push-notification",
-  "_phantomChildren": {},
-  "_requested": {
-    "raw": "react-native-push-notification@git+https://github.com/CMP-Studio/react-native-push-notification.git",
-    "scope": null,
-    "escapedName": "react-native-push-notification",
-    "name": "react-native-push-notification",
-    "rawSpec": "git+https://github.com/CMP-Studio/react-native-push-notification.git",
-    "spec": "git+https://github.com/CMP-Studio/react-native-push-notification.git",
-    "type": "hosted",
-    "hosted": {
-      "type": "github",
-      "ssh": "git@github.com:CMP-Studio/react-native-push-notification.git",
-      "sshUrl": "git+ssh://git@github.com/CMP-Studio/react-native-push-notification.git",
-      "httpsUrl": "git+https://github.com/CMP-Studio/react-native-push-notification.git",
-      "gitUrl": "git://github.com/CMP-Studio/react-native-push-notification.git",
-      "shortcut": "github:CMP-Studio/react-native-push-notification",
-      "directUrl": "https://raw.githubusercontent.com/CMP-Studio/react-native-push-notification/master/package.json"
-    }
-  },
-  "_requiredBy": [
-    "/"
-  ],
-  "_resolved": "git+https://github.com/CMP-Studio/react-native-push-notification.git#67a66fe3b0cd9640a416362171a500c96e638f78",
-  "_shasum": "8473c68c98aeb22bad2fa676c4aeb58619d22ff7",
-  "_shrinkwrap": null,
-  "_spec": "react-native-push-notification@git+https://github.com/CMP-Studio/react-native-push-notification.git",
-  "_where": "/Users/ticknors/DawnChorus",
-  "author": {
-    "name": "zo0r",
-    "email": "http://zo0r.me"
-  },
-  "bugs": {
-    "url": "https://github.com/zo0r/react-native-push-notification/issues"
-  },
-  "dependencies": {},
+  "name": "react-native-push-notification",
+  "version": "2.2.1",
   "description": "React Native Local and Remote Notifications",
-  "devDependencies": {},
-  "gitHead": "67a66fe3b0cd9640a416362171a500c96e638f78",
-  "homepage": "https://github.com/zo0r/react-native-push-notification#readme",
+  "main": "index",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "keywords": [
     "react-component",
     "react-native",
