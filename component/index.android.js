@@ -30,16 +30,18 @@ NotificationsComponent.prototype.requestPermissions = function(senderID: string)
 	RNPushNotification.requestPermissions(senderID);
 };
 
-NotificationsComponent.prototype.clearAllLocalNotifications = function() {
-	RNPushNotification.clearAllLocalNotifications();
-};
-
 NotificationsComponent.prototype.cancelLocalNotifications = function(details: Object) {
+  console.log('cancelling at index.android.js')
+  // console.log(details);
 	RNPushNotification.cancelLocalNotifications(details);
 };
 
 NotificationsComponent.prototype.cancelAllLocalNotifications = function() {
 	RNPushNotification.cancelAllLocalNotifications();
+};
+
+NotificationsComponent.prototype.clearAllLocalNotifications = function() {
+	RNPushNotification.clearAllLocalNotifications();
 };
 
 NotificationsComponent.prototype.presentLocalNotification = function(details: Object) {
@@ -68,10 +70,22 @@ NotificationsComponent.prototype.checkPermissions = function(callback: Function)
 NotificationsComponent.prototype.addEventListener = function(type: string, handler: Function) {
 	var listener;
 	if (type === 'notification') {
+    console.log('and registering too');
 		listener =  DeviceEventEmitter.addListener(
 			DEVICE_NOTIF_EVENT,
 			function(notifData) {
 				var data = JSON.parse(notifData.dataJSON);
+        console.log('at leaset here');
+				handler(data);
+			}
+		);
+	} else if (type === 'action') {
+    console.log('and registering too');
+		listener =  DeviceEventEmitter.addListener(
+			ACTION_NOTIF_EVENT,
+			function(notifData) {
+				var data = JSON.parse(notifData.dataJSON);
+        console.log('at leaset here');
 				handler(data);
 			}
 		);
@@ -116,4 +130,3 @@ module.exports = {
 	state: false,
 	component: new NotificationsComponent()
 };
-

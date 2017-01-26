@@ -20,6 +20,7 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
+import android.util.Log;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -177,6 +178,7 @@ public class RNPushNotification extends ReactContextBaseJavaModule implements Ac
      * @see <a href="https://facebook.github.io/react-native/docs/pushnotificationios.html">RN docs</a>
      */
     public void cancelAllLocalNotifications() {
+        Log.i(LOG_TAG, "cancelAllLocalNotifications");
         mRNPushNotificationHelper.cancelAllScheduledNotifications();
         mRNPushNotificationHelper.clearNotifications();
     }
@@ -187,6 +189,7 @@ public class RNPushNotification extends ReactContextBaseJavaModule implements Ac
      * centre.
      */
     public void clearAllLocalNotifications() {
+        Log.i(LOG_TAG, "clearAllLocalNotifications");
         mRNPushNotificationHelper.clearNotifications();
     }
 
@@ -199,8 +202,8 @@ public class RNPushNotification extends ReactContextBaseJavaModule implements Ac
      *
      * @see <a href="https://facebook.github.io/react-native/docs/pushnotificationios.html">RN docs</a>
      */
-    public void cancelLocalNotifications(ReadableMap userInfo) {
-        mRNPushNotificationHelper.cancelScheduledNotification(userInfo);
+    public void cancelLocalNotifications(ReadableMap details) {
+        mRNPushNotificationHelper.cancelScheduledNotification(details);
     }
 
     @ReactMethod

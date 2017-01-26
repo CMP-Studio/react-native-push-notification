@@ -168,6 +168,11 @@ public class RNPushNotificationHelper {
             if (group != null) {
                 notification.setGroup(group);
             }
+            
+            Double alarmUUID = bundle.getDouble("alarmUUID");
+            if (alarmUUID != null) {
+                bundle.putDouble("alarmUUID", alarmUUID);
+            }
 
             notification.setContentText(bundle.getString("message"));
 
@@ -303,12 +308,13 @@ public class RNPushNotificationHelper {
                         continue;
                     }
 
-                    Intent actionIntent = new Intent();
+                    Intent actionIntent = new Intent(context, intentClass);
+                    actionIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     actionIntent.setAction(context.getPackageName() + "." + action);
                     // Add "action" for later identifying which button gets pressed.
                     bundle.putString("action", action);
                     actionIntent.putExtra("notification", bundle);
-                    PendingIntent pendingActionIntent = PendingIntent.getBroadcast(context, notificationID, actionIntent,
+                    PendingIntent pendingActionIntent = PendingIntent.getActivity(context, notificationID, actionIntent,
                             PendingIntent.FLAG_UPDATE_CURRENT);
                     notification.addAction(icon, action, pendingActionIntent);
                 }
@@ -418,11 +424,10 @@ public class RNPushNotificationHelper {
         for (String id : scheduledNotificationsPersistence.getAll().keySet()) {
             try {
                 String notificationAttributesJson = scheduledNotificationsPersistence.getString(id, null);
-                if (notificationAttributesJson != null) {
-                    RNPushNotificationAttributes notificationAttributes = fromJson(notificationAttributesJson);
-                    if (notificationAttributes.matches(userInfo)) {
-                        cancelScheduledNotification(id);
-                    }
+                Log.d(LOG_TAG, notificationAttributesJson);
+                RNPushNotificationAttributes notificationAttributes = fromJson(notificationAttributesJson);
+                if (notificationAttributes.matches(userInfo)) {
+                    cancelScheduledNotification(id);
                 }
             } catch (JSONException e) {
                 Log.w(LOG_TAG, "Problem dealing with scheduled notification " + id, e);

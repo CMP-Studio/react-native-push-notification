@@ -1,4 +1,4 @@
-/**
+ /**
  * @providesModule Notifications
  */
 
@@ -16,6 +16,7 @@ var Notifications = {
 	onRegister: false,
 	onError: false,
 	onNotification: false,
+	onAction: false,
   onRemoteFetch: false,
 	isLoaded: false,
 	hasPoppedInitialNotification: false,
@@ -64,6 +65,10 @@ Notifications.configure = function(options: Object) {
 		this.onNotification = options.onNotification;
 	}
 
+	if ( typeof options.onAction !== 'undefined' ) {
+		this.onAction = options.onAction;
+	}
+
 	if ( typeof options.permissions !== 'undefined' ) {
 		this.permissions = options.permissions;
 	}
@@ -77,9 +82,11 @@ Notifications.configure = function(options: Object) {
 	}
 
 	if ( this.isLoaded === false ) {
+		this._onAction = this._onAction.bind(this);
 		this._onRegister = this._onRegister.bind(this);
 		this._onNotification = this._onNotification.bind(this);
 		this._onRemoteFetch = this._onRemoteFetch.bind(this);
+		this.callNative( 'addEventListener', [ 'action', this._onAction ] );
 		this.callNative( 'addEventListener', [ 'register', this._onRegister ] );
 		this.callNative( 'addEventListener', [ 'notification', this._onNotification ] );
 		this.callNative( 'addEventListener', [ 'localNotification', this._onNotification ] );
@@ -106,6 +113,7 @@ Notifications.configure = function(options: Object) {
 
 /* Unregister */
 Notifications.unregister = function() {
+	this.callNative( 'removeEventListener', [ 'action', this._onAction ] )
 	this.callNative( 'removeEventListener', [ 'register', this._onRegister ] )
 	this.callNative( 'removeEventListener', [ 'notification', this._onNotification ] )
 	this.callNative( 'removeEventListener', [ 'localNotification', this._onNotification ] )
@@ -221,6 +229,34 @@ Notifications._onNotification = function(data, isFromBackground = null) {
 	}
 };
 
+Notifications._onAction = function(data) {
+	if ( this.onAction !== false ) {
+		if ( Platform.OS === 'ios' ) {
+			this.onAction({
+				message: data.getMessage(),
+				data: data.getData(),
+				badge: data.getBadgeCount(),
+				alert: data.getAlert(),
+				sound: data.getSound()
+			});
+		} else {
+			var notificationData = {
+				...data
+			};
+
+			if ( typeof notificationData.data === 'string' ) {
+				try {
+					notificationData.data = JSON.parse(notificationData.data);
+				} catch(e) {
+					/* void */
+				}
+			}
+
+			this.onAction(notificationData);
+		}
+	}
+};
+
 /* onResultPermissionResult */
 Notifications._onPermissionResult = function() {
 	this.isPermissionsRequestPending = false;
@@ -259,7 +295,7 @@ Notifications.scheduleLocalNotification = function() {
 };
 
 Notifications.cancelLocalNotifications = function() {
-	return this.callNative('cancelLocalNotifications', arguments);
+  return this.callNative('cancelLocalNotifications', arguments);
 };
 
 Notifications.cancelAllLocalNotifications = function() {
