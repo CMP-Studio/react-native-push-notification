@@ -20,6 +20,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.media.AudioManager;
 
 import com.facebook.react.bridge.ReadableMap;
 
@@ -255,7 +256,7 @@ public class RNPushNotificationHelper {
                         soundUri = Uri.parse("android.resource://" + context.getPackageName() + "/" + resId);
                     }
                 }
-                notification.setSound(soundUri);
+                notification.setSound(soundUri, AudioManager.STREAM_ALARM);
             }
 
             if (bundle.containsKey("ongoing") || bundle.getBoolean("ongoing")) {
